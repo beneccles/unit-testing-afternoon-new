@@ -5,8 +5,8 @@ import axios from 'axios';
 import {MemoryRouter} from 'react-router-dom';
 import {posts} from './__data__/testData';
 
-it ('Post Renders a Post', () => {
-    const post = post[0];
+it ('Post Renders a Post', async () => {
+    const post = posts[0];
     let container;
     jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({ data: post}));
     await act(async () => {
