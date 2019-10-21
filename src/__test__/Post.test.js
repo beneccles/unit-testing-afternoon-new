@@ -6,5 +6,18 @@ import {MemoryRouter} from 'react-router-dom';
 import {posts} from './__data__/testData';
 
 it ('Post Renders a Post', () => {
+    const post = post[0];
+    let container;
+    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({ data: post}));
+    await act(async () => {
+        let renderObj = render(
+            // Spoofs HashRouter/BrowserRouter
+            <MemoryRouter>
+                <Post match={{ params: { postId: 1 }}} />
+            </MemoryRouter>
+        );
+        container = renderObj.container;
+    })
 
+    expect(container.textContent).toContain(post.text);
 })
